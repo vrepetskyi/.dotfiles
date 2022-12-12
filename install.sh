@@ -1,25 +1,36 @@
-#!/bin/sh
+#!/bin/bash
 
-printf "\nUpdating the system...\n"
-pacman -Syu --noconfirm
+printf '\n%b\n' "\033[1m"Updating\ the\ system..."\033[0m"
+pacman -Sy archlinux-keyring --noconfirm
+pacman -Su --noconfirm
 
-printf "\nInstalling zsh...\n"
-pacman -S zsh --noconfirm
-
-printf "\nInstalling oh-my-zsh...\n"
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-printf "\nCloning spaceship prompt...\n"
-git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-
-printf "\nInstalling misc packages...\n"
-pacman -S
+printf '\n%b\n' "\033[1m"Installing\ packages..."\033[0m"
+pacman -S \
+  zsh \
+  fontconfig \
+  unzip \
+  neovim \
+  exa \
   bat \
-  fc-cache \
+  git-delta \
   ranger \
+  fd \
+  ripgrep \
+  fzf \
+  sd \
+  choose \
+  gdu \
+  duf \
   bottom \
+  --needed \
   --noconfirm
 
-printf "\nInstalling JetBrains Mono font...\n"
+printf '\n%b\n' "\033[1m"Installing\ oh-my-zsh..."\033[0m"
+RUNZSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+
+printf '\n%b\n' "\033[1m"Cloning\ spaceship\ prompt..."\033[0m"
+git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH/custom/themes/spaceship-prompt" --depth=1
+
+printf '\n%b\n' "\033[1m"Installing\ JetBrains\ Mono\ font..."\033[0m"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
 
