@@ -1,7 +1,7 @@
 #!/bin/bash
 
 printf '\n%b\n' "\033[1m"Updating\ the\ system..."\033[0m"
-pacman -Sy archlinux-keyring --noconfirm
+pacman -Sy archlinux-keyring openssh --noconfirm
 pacman -Su --noconfirm
 
 printf '\n%b\n' "\033[1m"Installing\ packages..."\033[0m"
