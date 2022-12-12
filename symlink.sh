@@ -1,16 +1,27 @@
 #!/bin/bash
 
-cd $(dirname ${BASH_SOURCE[0]})
+initial_path=$(pwd)
+dotfiles_path=$(cd $(dirname $BASH_SOURCE[0]); pwd -P)
+cd ~
 
-ln -s -f "$(pwd -P)/zsh/.zshrc" ~
+printf '\n%b\n' 'Symlinking configs...'
+
+ln -s -f "$dotfiles_path/zsh/.zshrc" .
 
 ln -s -f "$ZSH/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH/custom/themes/spaceship.zsh-theme"
 
-mkdir --parents ~/.config/nvim
-ln -s -f "$(pwd -P)/nvim/init.lua" ~/.config/nvim
+ln -s -f "$dotfiles_path/git/.gitconfig" .
 
-mkdir --parents ~/.config/ranger
-ln -s -f "$(pwd -P)/ranger/rc.conf" ~/.config/ranger
+rm ~/.config
+mkdir .config
+cd .config
 
+mkdir nvim
+ln -s -f "$dotfiles_path/nvim/init.lua" nvim
+
+mkdir ranger
+ln -s -f "$dotfiles_path/ranger/rc.conf" ranger
+
+cd $initial_path
 exec zsh -l
 
