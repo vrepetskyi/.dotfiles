@@ -22,6 +22,9 @@ ln -s -f "$dotfiles_path/nvim/init.lua" nvim
 mkdir ranger
 ln -s -f "$dotfiles_path/ranger/rc.conf" ranger
 
+mkdir bat
+ln -s -f "$dotfiles_path/bat/config" bat
+
 cd $initial_path
 exec zsh -l
 
